@@ -111,16 +111,68 @@ bash scripts/run_rami.sh \
 
 ## 🗂️ Data manifests
 
-Audio is not redistributed. Obtain ASVspoof 2019 LA, ASVspoof 5, CodecFake,
-and AT-ADD from their official sources. Each task split is represented by a CSV:
+Audio is not redistributed. Download each dataset from its official source and
+follow its original license and access conditions.
+
+### Dataset access
+
+| Dataset | Subset used in this work | Official source |
+|---|---|---|
+| ASVspoof 2019 | Logical Access (LA) | [Zenodo](https://zenodo.org/records/6906306) (download and extract `LA.zip`) |
+| ASVspoof 5 | Track 1 | [Zenodo](https://zenodo.org/records/14498691) |
+| CodecFake | Training, development, and evaluation subsets | [Official repository and download table](https://github.com/xieyuankun/Codecfake) |
+| AT-ADD | Track 2 speech | [Hugging Face](https://huggingface.co/datasets/xieyuankun/AT-ADD-Track2) ([challenge instructions](https://www.at-add.com/instructions); access approval is required) |
+
+Keep the extracted audio outside this Git repository. The following sibling
+layout is recommended, but the directory names are not hard-coded:
+
+```text
+workspace/
+├── RF-Prompt/                         # this repository
+├── datasets/                          # raw/extracted audio
+│   ├── ASVspoof2019_LA/
+│   ├── ASVspoof5/
+│   ├── CodecFake/
+│   └── AT-ADD-Track2/
+└── protocols/
+    ├── five_protocols/                # extracted fixed Protocols 1--5
+    └── locked_source/                 # optional inputs for rebuilding them
+```
+
+The paper's complete, fixed protocol manifests are provided in
+[`protocols/rfprompt_protocols_seed2026.zip`](protocols/rfprompt_protocols_seed2026.zip).
+Extract them once:
+
+```bash
+mkdir -p ../protocols
+unzip protocols/rfprompt_protocols_seed2026.zip -d ../protocols
+export RFPROMPT_DATA_ROOT=/path/to/workspace/datasets
+```
+
+The archive contains all five protocols, every train/development/evaluation
+split, the generator taxonomy, sample counts, and SHA256 audit metadata. Its
+SHA256 checksum is recorded in [`protocols/SHA256SUMS`](protocols/SHA256SUMS).
+
+Paths inside the released manifests are portable and begin with one of the
+four recommended dataset directory names shown above. When
+`RFPROMPT_DATA_ROOT` is set, the loader resolves these paths from that root. An
+absolute `audio_path` may still point anywhere on the local machine or server;
+without the environment variable, a relative path is resolved from the CSV
+directory.
+
+### Training manifests
+
+Each task split used directly by the trainer is represented by a CSV with at
+least these three columns:
 
 ```csv
 utt_id,audio_path,label
-example_real,/path/to/example_real.wav,0
-example_fake,/path/to/example_fake.wav,1
+example_real,ASVspoof2019_LA/example_real.flac,0
+example_fake,ASVspoof2019_LA/example_fake.flac,1
 ```
 
-`audio_path` may be absolute or relative to its CSV. RAMI uses:
+Here, `0` denotes real speech and `1` denotes fake speech. The RAMI training
+root has the following layout:
 
 ```text
 protocol_5_rami/
@@ -129,6 +181,25 @@ protocol_5_rami/
 ├── b2_neural_codec/{train,dev,eval}.csv
 └── b3_codec_token_alm/{train,dev,eval}.csv
 ```
+
+### Rebuilding all five protocols (optional)
+
+The released archive is sufficient for reproducing the experiments. To audit
+or reconstruct the task assignment itself, prepare the locked source manifests
+described in [docs/PROTOCOLS.md](docs/PROTOCOLS.md). These builder inputs
+additionally contain `dataset` and `task_id`; accepted dataset names are
+`asv19_la`, `asvspoof5_track1`, `codecfake`, and `atadd_track2_speech`. Then
+run:
+
+```bash
+python scripts/build_five_protocols.py \
+  --source ../protocols/locked_source \
+  --output ../protocols/five_protocols
+```
+
+The generated RAMI directory is
+`../protocols/five_protocols/protocol_5_rami` and can be passed directly as the
+second argument of `scripts/run_rami.sh`.
 
 ## 🧭 Protocols
 

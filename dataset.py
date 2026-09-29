@@ -152,7 +152,11 @@ class atadd_dataset(Dataset):
 
 
 class ProtocolManifestDataset(Dataset):
-    """Read a continual-learning manifest with absolute or relative paths."""
+    """Read a continual-learning manifest with absolute or relative paths.
+
+    When ``RFPROMPT_DATA_ROOT`` is set, relative paths are resolved from that
+    directory. Otherwise, they are resolved from the manifest directory.
+    """
 
     def __init__(self, manifest_path, audio_length=64600):
         super(ProtocolManifestDataset, self).__init__()
@@ -171,7 +175,11 @@ class ProtocolManifestDataset(Dataset):
             for row in reader:
                 audio_path = Path(row['audio_path'].strip())
                 if not audio_path.is_absolute():
-                    audio_path = Path(manifest_path).resolve().parent / audio_path
+                    data_root = os.environ.get('RFPROMPT_DATA_ROOT')
+                    if data_root:
+                        audio_path = Path(data_root).expanduser() / audio_path
+                    else:
+                        audio_path = Path(manifest_path).resolve().parent / audio_path
                 self.all_files.append((
                     str(audio_path),
                     row['utt_id'].strip(),
