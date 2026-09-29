@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the accompanying paper."
+title: "RF-Prompt for Continual Audio Deepfake Detection"
+type: software
+authors:
+  - family-names: Xie
+    given-names: Yuankun
+year: 2026
+license: MIT
+repository-code: "https://github.com/REPLACE_WITH_PUBLIC_REPOSITORY"

@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.idea/
+.vscode/
+checkpoints/
+runs/
+outputs/
+*.pt
+*.pth
+*.ckpt
+*.log
+audio/
+data/
+datasets/
+
