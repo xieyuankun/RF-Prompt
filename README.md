@@ -7,12 +7,12 @@
 **RF-Prompt for Continual Audio Deepfake Detection**
 
 <p>
-  <img src="https://img.shields.io/badge/Paper-arXiv-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" alt="arXiv paper">
+  <a href="https://arxiv.org/abs/2609.37586"><img src="https://img.shields.io/badge/arXiv-2609.37586-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" alt="arXiv:2609.37586"></a>
   <img src="https://img.shields.io/badge/Task-Continual_ADD-0b7285?style=for-the-badge" alt="Continual audio deepfake detection">
   <img src="https://img.shields.io/badge/Protocol-RAMI-f08c00?style=for-the-badge" alt="RAMI protocol">
 </p>
 
-<p>s
+<p>
   <img src="https://img.shields.io/badge/Python-3.10-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.10">
   <img src="https://img.shields.io/badge/PyTorch-2.1+-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch 2.1+">
   <img src="https://img.shields.io/badge/Backbone-XLS--R_300M-2f9e44?style=flat-square" alt="XLS-R 300M">
@@ -359,9 +359,11 @@ repository, please cite our paper:
 @article{xie2026rfprompt,
   title   = {Learning as Deepfakes Evolve: RF-Prompt for Continual Audio
              Deepfake Detection},
-  author  = {Xie, Yuankun and others},
-  journal = {arXiv preprint},
-  year    = {2026}
+  author  = {Xie, Yuankun and Guo, Xiaoxuan and Wang, Xiaopeng and Qin, Siqing
+             and Li, Shaole and Lee, Kong Aik},
+  journal = {arXiv preprint arXiv:2609.37586},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2609.37586}
 }
 ```
 
@@ -376,8 +378,8 @@ cite the corresponding original work:
 Copy-ready BibTeX entries for all of these methods are provided in
 [`CITATIONS.bib`](CITATIONS.bib). The tables in the
 [reproduction section](#️-reproduction) state where each implementation is
-used in our experiments. The RF-Prompt entry above is provisional and should be
-updated with the complete author list and arXiv identifier when available.
+used in our experiments. The archival preprint is available at
+[arXiv:2609.37586](https://arxiv.org/abs/2609.37586).
 
 ## 📜 License
 

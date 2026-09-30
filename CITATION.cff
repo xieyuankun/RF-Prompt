@@ -5,6 +5,36 @@ type: software
 authors:
   - family-names: Xie
     given-names: Yuankun
+  - family-names: Guo
+    given-names: Xiaoxuan
+  - family-names: Wang
+    given-names: Xiaopeng
+  - family-names: Qin
+    given-names: Siqing
+  - family-names: Li
+    given-names: Shaole
+  - family-names: Lee
+    given-names: Kong Aik
 year: 2026
 license: MIT
-repository-code: "https://github.com/REPLACE_WITH_PUBLIC_REPOSITORY"
+repository-code: "https://github.com/xieyuankun/RF-Prompt"
+url: "https://arxiv.org/abs/2609.37586"
+preferred-citation:
+  type: article
+  title: "Learning as Deepfakes Evolve: RF-Prompt for Continual Audio Deepfake Detection"
+  authors:
+    - family-names: Xie
+      given-names: Yuankun
+    - family-names: Guo
+      given-names: Xiaoxuan
+    - family-names: Wang
+      given-names: Xiaopeng
+    - family-names: Qin
+      given-names: Siqing
+    - family-names: Li
+      given-names: Shaole
+    - family-names: Lee
+      given-names: Kong Aik
+  journal: "arXiv preprint arXiv:2609.37586"
+  year: 2026
+  url: "https://arxiv.org/abs/2609.37586"
